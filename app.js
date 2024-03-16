@@ -1,22 +1,21 @@
 const express = require('express');
 
+const adminRouter = require("./routes/admin");
+const shopRouter = require("./routes/shop");
+
 const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended : true}));
 
-app.use("/add-product", (req, res , next) => {
-    res.send('<form action="/product" method="POST"><input type="text" name="product"/><input type="number" name="quantity"/><button type="submit">Add Product<button></form>')
-})
+app.use("/admin",adminRouter);
+app.use(shopRouter)
 
-app.use("/product" , (req,res,next) => {
-    console.log(req.body);
-    res.redirect("/");
-})
+// for handling 404 page
 
-app.use("/" , (req,res,next) => {
-    res.send('<h1>Hello From Express Js.</h1>')
+app.use((req,res,next) => {
+    res.status(404).send('<h1>404 Page Not Found 😔</h1>')
 })
 
 app.listen(3000);
