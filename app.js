@@ -2,6 +2,7 @@ const express = require('express');
 
 const adminRouter = require("./routes/admin");
 const shopRouter = require("./routes/shop");
+const contactRouter = require("./routes/contact");
 
 const bodyParser = require('body-parser');
 
@@ -10,8 +11,8 @@ const app = express();
 app.use(bodyParser.urlencoded({extended : true}));
 
 app.use("/admin",adminRouter);
-app.use(shopRouter)
-
+app.use(shopRouter);
+app.use(contactRouter);
 // for handling 404 page
 
 app.use((req,res,next) => {
